@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Root Variables for Theme Colors */
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --text-nav: #2c3e50;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-nav: rgba(26, 26, 46, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-nav: #ffffff;
+            --card-bg: #16213e;
+            --border-color: #495057;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background-color: var(--bg-nav) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand img {
+            width: 80px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            background-color: var(--bg-primary);
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            padding-left: 40px;
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary) !important;
+            background-color: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        /* Active Navigation Link */
+        .navbar-nav .nav-link.active {
+            color: var(--primary) !important;
+            background-color: rgba(102, 126, 234, 0.1);
+            border-radius: 5px;
+            padding: 8px 15px;
+        }
+        
+        /* Card Styles */
+        .profile-card, .post-card, .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .profile-card:hover, .post-card:hover, .sidebar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .profile-cover {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+        }
+
+        .profile-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--card-bg);
+            margin-top: -60px;
+            position: relative;
+            z-index: 1;
+            background-color: var(--card-bg);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .post-input {
+            border-radius: 35px;
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+        
+        .post-input:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.1);
+        }
+        
+        .post-actions {
+            display: flex;
+            padding-top: 8px;
+        }
+        
+        .post-action-btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .post-action-btn:hover {
+            background-color: rgba(102, 126, 234, 0.1);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .post-action-btn i {
+            margin-right: 8px;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .post-author-info {
+            margin-left: 10px;
+        }
+        
+        .post-author-info h6 {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .post-author-info p {
+            margin-bottom: 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .post-avatar:hover {
+            transform: scale(1.1);
+        }
+        
+        .sidebar-card {
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-title {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+        
+        .connection-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .connection-item:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .connection-item:last-child {
+            border-bottom: none;
+        }
+        
+        .connection-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .connection-avatar:hover {
+            transform: scale(1.1);
+        }
+        
+        .connection-name {
+            font-weight: 600;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        .connection-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            transition: left 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover::before {
+            left: 0;
+        }
+        
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .user-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .user-type.teacher {
+            background: linear-gradient(45deg, #e7f3ff, #d1e7ff);
+            color: var(--primary);
+        }
+        
+        .user-type.student {
+            background: linear-gradient(45deg, #e6f6eb, #d1f2d9);
+            color: var(--success);
+        }
+        
+        .education-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .education-item:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .education-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .education-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        .education-school {
+            font-weight: 600;
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+        
+        .education-degree {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+        
+        .education-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .skills-list {
+            list-style-type: none;
+            padding: 10px 15px;
+        }
+        
+        .skills-list li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        .skills-list li:hover {
+            transform: translateX(5px);
+            color: var(--primary);
+        }
+        
+        .skills-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .skills-list li span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .skills-list li:hover span {
+            transform: scale(1.2);
+        }
+        
+        .featured-courses {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 15px;
+        }
+        
+        .course-card {
+            min-width: 220px;
+            max-width: 220px;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .course-img {
+            height: 120px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover .course-img {
+            transform: scale(1.05);
+        }
+        
+        .course-body {
+            padding: 15px;
+        }
+        
+        .course-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        
+        .course-author {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .course-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-rating i {
+            color: #b4690e;
+            font-size: 0.8rem;
+        }
+        
+        .course-rating span {
+            font-size: 0.8rem;
+            margin-left: 5px;
+            color: var(--text-secondary);
+        }
+        
+        .news-card {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .news-card:last-child {
+            border-bottom: none;
+        }
+        
+        .news-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .news-meta {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .notification-counter {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            background: linear-gradient(45deg, var(--danger), #e11d48);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .navbar-nav .nav-link {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            
+            .featured-courses {
+                padding: 10px;
+            }
+            
+            .course-card {
+                min-width: 200px;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top">
+        <div class="container">
+            <img size="100" width="100" alt="Lahiru" src="logo.png">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="position-relative mx-auto">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="form-control search-bar" placeholder="Search for teachers, students">
+                </div>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                            <span class="notification-counter">5</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-primary" onclick="showPostModal()">
+                            <span><i class="fas fa-plus me-1"></i> Post</span>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <!-- Profile Card -->
+                <div class="profile-card mb-4 fade-in">
+                    <div class="profile-cover"></div>
+                    <div class="text-center">
+                        <img src="T4.jpg" width="120" height="120" alt="Profile" class="profile-avatar">
+                    </div>
+                    <div class="text-center p-3">
+                        <h5 class="mb-1">Dr. Sarah Johnson</h5>
+                        <div class="user-type teacher">Teacher</div>
+                        <p class="text-muted mb-2">Computer Science Professor at Stanford University</p>
+                        <p class="text-muted small mb-3">Palo Alto, California</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm">
+                                <span>View Profile</span>
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm">Edit Profile</button>
+                        </div>
+                    </div>
+                    <div class="border-top p-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Profile views</span>
+                            <span class="fw-bold">1,234</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">Post impressions</span>
+                            <span class="fw-bold">5,678</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connections -->
+                <div class="sidebar-card mb-4 fade-in">
+                    <div class="sidebar-title">
+                        <h6 class="mb-0">Your Connections</h6>
+                    </div>
+                    <div class="connection-item">
+                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
+                        <div>
+                            <p class="connection-name">John Smith</p>
+                            <p class="connection-title">Web Developer</p>
+                        </div>
+                    </div>
+                    <div class="connection-item">
+                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
+                        <div>
+                            <p class="connection-name">Emily Davis</p>
+                            <p class="connection-title">Data Scientist</p>
+                        </div>
+                    </div>
+                    <div class="connection-item">
+                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
+                        <div>
+                            <p class="connection-name">Mike Wilson</p>
+                            <p class="connection-title">UX Designer</p>
+                        </div>
+                    </div>
+                    <div class="p-3 border-top">
+                        <a href="#" class="text-decoration-none">Show all connections</a>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="sidebar-card mb-4 fade-in">
+                    <div class="sidebar-title">
+                        <h6 class="mb-0">Education</h6>
+                    </div>
+                    <div class="education-item">
+                        <img src="https://via.placeholder.com/48" alt="Stanford" class="education-logo">
+                        <div>
+                            <p class="education-school">Stanford University</p>
+                            <p class="education-degree">PhD in Computer Science</p>
+                            <p class="education-date">2015 - 2019</p>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <img src="https://via.placeholder.com/48" alt="MIT" class="education-logo">
+                        <div>
+                            <p class="education-school">MIT</p>
+                            <p class="education-degree">Master's in Computer Science</p>
+                            <p class="education-date">2013 - 2015</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="sidebar-card mb-4 fade-in">
+                    <div class="sidebar-title">
+                        <h6 class="mb-0">Skills</h6>
+                    </div>
+                    <ul class="skills-list">
+                        <li><span></span>Machine Learning</li>
+                        <li><span></span>Python</li>
+                        <li><span></span>Data Science</li>
+                        <li><span></span>Artificial Intelligence</li>
+                        <li><span></span>Deep Learning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Feed -->
+            <div class="col-lg-6">
+                <!-- Create Post -->
+                <div class="post-card mb-4 fade-in">
+                    <div class="p-3">
+                        <div class="d-flex align-items-center">
+                            <img src="T4.jpg" alt="Profile" class="post-avatar">
+                            <input type="text" class="form-control post-input ms-3" placeholder="Start a post...">
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action-btn">
+                                <i class="fas fa-image"></i>
+                                <span>Photo</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-video"></i>
+                                <span>Video</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-calendar"></i>
+                                <span>Event</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-newspaper"></i>
+                                <span>Article</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 1 -->
+                <div class="post-card mb-4 fade-in">
+                    <div class="p-3">
+                        <div class="post-author">
+                            <img src="T4.jpg" alt="Profile" class="post-avatar">
+                            <div class="post-author-info">
+                                <h6>Dr. Sarah Johnson</h6>
+                                <p>Computer Science Professor • 2h</p>
+                            </div>
+                        </div>
+                        <p class="mb-3">Excited to announce that I'll be teaching a new course on Advanced Machine Learning this semester! Looking forward to sharing insights with my students. #MachineLearning #Education #AI</p>
+                        <img src="https://via.placeholder.com/600x300" alt="Post" class="img-fluid rounded mb-3">
+                        <div class="post-actions">
+                            <div class="post-action-btn">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-comment"></i>
+                                <span>Comment</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="post-card mb-4 fade-in">
+                    <div class="p-3">
+                        <div class="post-author">
+                            <img src="https://via.placeholder.com/48" alt="Profile" class="post-avatar">
+                            <div class="post-author-info">
+                                <h6>John Smith</h6>
+                                <p>Web Developer • 4h</p>
+                            </div>
+                        </div>
+                        <p class="mb-3">Just completed a challenging React project! The learning curve was steep but totally worth it. Here are some key takeaways from the experience...</p>
+                        <div class="post-actions">
+                            <div class="post-action-btn">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-comment"></i>
+                                <span>Comment</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </div>
+                            <div class="post-action-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-3">
+                <!-- Featured Courses -->
+                <div class="sidebar-card mb-4 fade-in">
+                    <div class="sidebar-title">
+                        <h6 class="mb-0">Featured Courses</h6>
+                    </div>
+                    <div class="featured-courses">
+                        <div class="course-card">
+                            <img src="https://via.placeholder.com/220x120" alt="Course" class="course-img">
+                            <div class="course-body">
+                                <h6 class="course-title">Machine Learning Basics</h6>
+                                <p class="course-author">Dr. Sarah Johnson</p>
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8 (1.2k reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <img src="https://via.placeholder.com/220x120" alt="Course" class="course-img">
+                            <div class="course-body">
+                                <h6 class="course-title">Web Development</h6>
+                                <p class="course-author">John Smith</p>
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.6 (856 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News -->
+                <div class="sidebar-card mb-4 fade-in">
+                    <div class="sidebar-title">
+                        <h6 class="mb-0">Today's Top News</h6>
+                    </div>
+                    <div class="news-card">
+                        <h6 class="news-title">New AI Breakthrough in Education</h6>
+                        <p class="news-meta">Tech News • 2h ago</p>
+                    </div>
+                    <div class="news-card">
+                        <h6 class="news-title">Remote Learning Trends 2024</h6>
+                        <p class="news-meta">Education • 4h ago</p>
+                    </div>
+                    <div class="news-card">
+                        <h6 class="news-title">Best Programming Languages to Learn</h6>
+                        <p class="news-meta">Tech • 6h ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                themeToggle.title = 'Switch to Light Mode';
+            }
+            
+            // Animate elements on scroll
+            animateOnScroll();
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Enhanced theme toggle with better visual feedback
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+                themeToggle.title = 'Switch to Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+                themeToggle.title = 'Switch to Light Mode';
+            }
+            
+            // Add a subtle animation effect
+            themeToggle.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        }
+
+        // Show post modal (placeholder function)
+        function showPostModal() {
+            alert('Post creation modal would open here!');
+        }
+    </script>
+</body>
+</html>

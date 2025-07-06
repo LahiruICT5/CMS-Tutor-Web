@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Root Variables for Theme Colors */
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --text-nav: #2c3e50;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --hero-overlay: rgba(0, 0, 0, 0.3);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-nav: rgba(26, 26, 46, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-nav: #ffffff;
+            --card-bg: #16213e;
+            --border-color: #495057;
+            --hero-overlay: rgba(0, 0, 0, 0.6);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Active Navigation Link */
+        .navbar-nav .nav-link.active {
+            color: #007bff !important;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 5px;
+            padding: 8px 15px;
+        }
+
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--bg-nav) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand img {
+            width: 80px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+            background-color: rgba(0, 123, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-auth {
+            margin-left: 10px;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 600;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+        }
+
+        .btn-login:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-signup {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: 2px solid #007bff;
+        }
+
+        .btn-signup:hover {
+            background: linear-gradient(45deg, #0056b3, #004085);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-form {
+            display: flex;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-form input {
+            border: none;
+            padding: 12px 20px;
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .search-form button {
+            background: #007bff;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background: #0056b3;
+        }
+
+        /* Course Section */
+        .courses {
+            padding: 60px 0;
+            background-color: var(--bg-secondary);
+            transition: background-color 0.3s ease;
+        }
+
+        .courses h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-card-body {
+            padding: 30px 20px;
+        }
+
+        .course-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        .course-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-course {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-course::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transition: left 0.3s ease;
+        }
+
+        .btn-course:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-course:hover::before {
+            left: 0;
+        }
+
+        .btn-course span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-nav);
+            color: var(--text-nav);
+            text-align: center;
+            padding: 8px 0 4px 0;
+            margin-top: 0;
+            transition: background-color 0.3s ease;
+            font-size: 0.92rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .search-form {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .search-form input,
+            .search-form button {
+                border-radius: 0;
+            }
+            
+            .courses h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tab Content Styles */
+        .tab-content {
+            display: none;
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-item {
+            background: var(--card-bg);
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .teacher-profile {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .teacher-profile:hover {
+            transform: translateY(-5px);
+        }
+
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Calendar Styles */
+        .calendar-view {
+            width: 100%;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .calendar-cell {
+            padding: 8px;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .calendar-cell.header {
+            background-color: var(--bg-primary);
+            font-weight: bold;
+            color: var(--text-primary);
+            min-height: 40px;
+        }
+
+        .calendar-cell.time {
+            background-color: var(--bg-primary);
+            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .calendar-cell.event {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 2px;
+        }
+
+        .calendar-cell.event:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .event-content {
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .calendar-row {
+            display: grid;
+            grid-template-columns: 80px repeat(7, 1fr);
+        }
+
+        /* Month Calendar Styles */
+        .month-calendar {
+            width: 100%;
+        }
+
+        .month-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .month-cell {
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-primary);
+            border-right: 1px solid var(--border-color);
+        }
+
+        .month-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .month-day {
+            padding: 8px;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            min-height: 80px;
+            position: relative;
+            background-color: var(--bg-secondary);
+        }
+
+        .month-day.today {
+            background-color: rgba(0, 123, 255, 0.1);
+            border: 2px solid #007bff;
+        }
+
+        .month-day.has-event {
+            background-color: rgba(102, 126, 234, 0.1);
+        }
+
+        .day-number {
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .day-event {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
+
+        /* Responsive Calendar */
+        @media (max-width: 768px) {
+            .calendar-header,
+            .calendar-row {
+                grid-template-columns: 60px repeat(7, 1fr);
+            }
+            
+            .calendar-cell.time {
+                font-size: 0.8rem;
+            }
+            
+            .event-content {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="logo.png" alt="Tutor Logo" onerror="this.style.display='none'">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home" onclick="showTab('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard" onclick="showTab('dashboard')">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedules" onclick="showTab('schedules')">Class Schedules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#teachers" onclick="showTab('teachers')">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#community" onclick="showTab('community')">Community</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <!-- User Profile Avatar -->
+                    <div class="ms-3">
+                        <a href="index3.html" style="display:inline-block;">
+                            <img src="profile.jpg" alt="User Profile" style="width:40px; height:40px; object-fit:cover; border-radius:50%; border:2px solid #007bff; box-shadow:0 2px 8px rgba(0,0,0,0.08); cursor:pointer;">
+                        </a>
+                    </div>
+            </div>
+            </div>
+            </div>
+        </nav>
+
+    <!-- Home Tab Content -->
+    <div id="home" class="tab-content active">
+        <!-- Hero Section from index4.html -->
+        <div class="hero">
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card p-4 shadow">
+                            <h1>Learn with confidence</h1>
+                            <p class="lead">Master new skills with courses from expert instructors. Join millions of students already learning on Tutor.</p>
+                            <form class="mt-4">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="What do you want to learn?">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search me-2"></i> Search
+                                    </button>
+                                </div>
+        </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-none d-md-block">
+                        <img src="T1.jpg" width="500" height="300" alt="Learning illustration" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Section from index4.html -->
+        <div class="container my-5">
+            <h2 class="mb-4">Top Categories</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <a href="#" class="category-card d-block text-center p-4">
+                        <i class="fas fa-laptop-code fa-3x mb-3"></i>
+                        <h5>Web Development</h5>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="#" class="category-card d-block text-center p-4">
+                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <h5>Data Science</h5>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="#" class="category-card d-block text-center p-4">
+                        <i class="fas fa-mobile-alt fa-3x mb-3"></i>
+                        <h5>Mobile Development</h5>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="#" class="category-card d-block text-center p-4">
+                        <i class="fas fa-paint-brush fa-3x mb-3"></i>
+                        <h5>Design</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Courses Section from index4.html -->
+        <div class="container my-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Featured Classes</h2>
+                <a href="#" class="btn btn-outline-primary">View All</a>
+            </div>
+                <div class="row g-4">
+                <!-- Course Card 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <img src="T2.jpg" width="300" height="200" class="card-img-top" alt="Course thumbnail">
+                        <div class="card-body">
+                            <h5 class="card-title">Complete Web Development Bootcamp</h5>
+                            <p class="card-text text-muted">John Doe</p>
+                            <div class="course-rating mb-2">
+                                <span class="fw-bold">4.8</span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-muted">(2,345)</span>
+                            </div>
+                            <span class="badge bg-success">Bestseller</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course Card 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <img src="T3.jpeg" width="300" height="200" class="card-img-top" alt="Course thumbnail">
+                        <div class="card-body">
+                            <h5 class="card-title">Python for Data Science and Machine Learning</h5>
+                            <p class="card-text text-muted">Jane Smith</p>
+                            <div class="course-rating mb-2">
+                                <span class="fw-bold">4.9</span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-muted">(1,820)</span>
+                            </div>
+                            <span class="badge bg-danger">Hot & New</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more course cards as needed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructor Highlight Section -->
+    <section class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-lg p-4 d-flex flex-md-row align-items-center">
+                    <img src="T1.jpg" alt="Featured Instructor" class="rounded-circle me-md-4 mb-3 mb-md-0" style="width:110px; height:110px; object-fit:cover; border:3px solid #007bff;">
+                    <div>
+                        <h4 class="mb-1">Lahiru Perera</h4>
+                        <p class="text-muted mb-2">Lead Instructor - Web & AI</p>
+                        <p class="mb-2">With 10+ years of teaching experience, Lahiru specializes in web development and artificial intelligence. He is passionate about helping students achieve their tech dreams.</p>
+                        <div>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-danger me-3"><i class="fab fa-youtube fa-lg"></i></a>
+                            <a href="#" class="text-info"><i class="fab fa-twitter fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Dashboard Tab Content -->
+    <div id="dashboard" class="tab-content">
+        <div class="container" style="margin-top: 100px;">
+            <h2 class="text-center mb-4">Student Dashboard</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="dashboard-content">
+                        <h4><i class="fas fa-book me-2"></i>My Courses</h4>
+                        <div class="course-progress mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Web Development</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Data Science</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar" role="progressbar" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-content">
+                        <h4><i class="fas fa-calendar me-2"></i>Upcoming Classes</h4>
+                        <div class="mt-3">
+                            <p><strong>Today:</strong> JavaScript Basics - 2:00 PM</p>
+                            <p><strong>Tomorrow:</strong> Python Data Analysis - 10:00 AM</p>
+                            <p><strong>Friday:</strong> React Components - 3:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Schedules Tab Content -->
+    <div id="schedules" class="tab-content">
+        <div class="container" style="margin-top: 100px;">
+            <h2 class="text-center mb-4">Class Schedules & Calendar</h2>
+            
+            <!-- Schedule Controls -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary active" onclick="changeView('week')">Week View</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="changeView('month')">Month View</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="changeView('list')">List View</button>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-success" onclick="addNewSchedule()">
+                        <i class="fas fa-plus me-2"></i>Add Schedule
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar Navigation -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-secondary" onclick="previousPeriod()">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h4 id="currentPeriod" class="mb-0">This Week</h4>
+                                <button class="btn btn-outline-secondary" onclick="nextPeriod()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Class Calendar</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <!-- Week View Calendar -->
+                            <div id="weekView" class="calendar-view">
+                                <div class="calendar-header">
+                                    <div class="calendar-cell header">Time</div>
+                                    <div class="calendar-cell header">Monday</div>
+                                    <div class="calendar-cell header">Tuesday</div>
+                                    <div class="calendar-cell header">Wednesday</div>
+                                    <div class="calendar-cell header">Thursday</div>
+                                    <div class="calendar-cell header">Friday</div>
+                                    <div class="calendar-cell header">Saturday</div>
+                                    <div class="calendar-cell header">Sunday</div>
+                                </div>
+                                <div class="calendar-body">
+                                    <div class="calendar-row">
+                                        <div class="calendar-cell time">9:00 AM</div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Data Science">
+                                            <div class="event-content">
+                                                <strong>Data Science</strong><br>
+                                                <small>Sarah Johnson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Data Science">
+                                            <div class="event-content">
+                                                <strong>Data Science</strong><br>
+                                                <small>Sarah Johnson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Digital Marketing">
+                                            <div class="event-content">
+                                                <strong>Digital Marketing</strong><br>
+                                                <small>Mike Wilson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                    </div>
+                                    <div class="calendar-row">
+                                        <div class="calendar-cell time">10:00 AM</div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Data Science">
+                                            <div class="event-content">
+                                                <strong>Data Science</strong><br>
+                                                <small>Sarah Johnson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Data Science">
+                                            <div class="event-content">
+                                                <strong>Data Science</strong><br>
+                                                <small>Sarah Johnson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Digital Marketing">
+                                            <div class="event-content">
+                                                <strong>Digital Marketing</strong><br>
+                                                <small>Mike Wilson</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                    </div>
+                                    <div class="calendar-row">
+                                        <div class="calendar-cell time">2:00 PM</div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell"></div>
+                                    </div>
+                                    <div class="calendar-row">
+                                        <div class="calendar-cell time">3:00 PM</div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell event" data-course="Web Development">
+                                            <div class="event-content">
+                                                <strong>Web Development</strong><br>
+                                                <small>John Smith</small>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-cell"></div>
+                                        <div class="calendar-cell"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Month View Calendar -->
+                            <div id="monthView" class="calendar-view" style="display: none;">
+                                <div class="month-calendar">
+                                    <div class="month-header">
+                                        <div class="month-cell">Sun</div>
+                                        <div class="month-cell">Mon</div>
+                                        <div class="month-cell">Tue</div>
+                                        <div class="month-cell">Wed</div>
+                                        <div class="month-cell">Thu</div>
+                                        <div class="month-cell">Fri</div>
+                                        <div class="month-cell">Sat</div>
+                                    </div>
+                                    <div class="month-body" id="monthBody">
+                                        <!-- Month calendar will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- List View -->
+                            <div id="listView" class="calendar-view" style="display: none;">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Web Development Fundamentals</h6>
+                                            <small class="text-muted">Monday, Wednesday, Friday - 2:00 PM - 4:00 PM</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-primary">John Smith</span>
+                                            <br>
+                                            <small class="text-muted">Room 101</small>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Data Science with Python</h6>
+                                            <small class="text-muted">Tuesday, Thursday - 10:00 AM - 12:00 PM</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Sarah Johnson</span>
+                                            <br>
+                                            <small class="text-muted">Room 202</small>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Digital Marketing Strategy</h6>
+                                            <small class="text-muted">Saturday - 9:00 AM - 1:00 PM</small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-warning">Mike Wilson</span>
+                                            <br>
+                                            <small class="text-muted">Room 303</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar - Upcoming Classes & Quick Actions -->
+                <div class="col-md-4">
+                    <!-- Today's Schedule -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-calendar-day me-2"></i>Today's Classes</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush" id="todaySchedule">
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Web Development</h6>
+                                            <small class="text-muted">2:00 PM - 4:00 PM</small>
+                                        </div>
+                                        <span class="badge bg-primary">John Smith</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Data Science</h6>
+                                            <small class="text-muted">10:00 AM - 12:00 PM</small>
+                                        </div>
+                                        <span class="badge bg-success">Sarah Johnson</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-tools me-2"></i>Quick Actions</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="exportSchedule()">
+                                    <i class="fas fa-download me-2"></i>Export Schedule
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="setReminder()">
+                                    <i class="fas fa-bell me-2"></i>Set Reminder
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="shareSchedule()">
+                                    <i class="fas fa-share me-2"></i>Share Schedule
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="requestChange()">
+                                    <i class="fas fa-edit me-2"></i>Request Change
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class Statistics -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>This Week's Stats</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h4 class="text-primary">12</h4>
+                                    <small class="text-muted">Total Classes</small>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="text-success">8</h4>
+                                    <small class="text-muted">Hours</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h4 class="text-info">3</h4>
+                                    <small class="text-muted">Teachers</small>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="text-warning">5</h4>
+                                    <small class="text-muted">Subjects</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teachers Tab Content -->
+    <div id="teachers" class="tab-content">
+        <div class="container" style="margin-top: 100px;">
+            <h2 class="text-center mb-4">Our Expert Teachers</h2>
+            
+            <!-- Search and Filter Section -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search teachers by name, subject, or expertise...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select">
+                        <option selected>All Subjects</option>
+                        <option>Web Development</option>
+                        <option>Data Science</option>
+                        <option>Digital Marketing</option>
+                        <option>Mobile Development</option>
+                        <option>Design</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Teacher 1 - Enhanced Profile -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T4.jpg" alt="John Smith" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>John Smith</h4>
+                        <p class="text-muted">Web Development Expert</p>
+                        <div class="mb-3">
+                            <span class="badge bg-primary me-1">React</span>
+                            <span class="badge bg-primary me-1">Node.js</span>
+                            <span class="badge bg-primary me-1">JavaScript</span>
+                        </div>
+                        <p class="small">5+ years experience in full-stack development. Specializes in React, Node.js, and modern web technologies.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.9 (1,234 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">2,456 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Teacher 2 - Enhanced Profile -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T5.jpg" alt="Sarah Johnson" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>Sarah Johnson</h4>
+                        <p class="text-muted">Data Science Specialist</p>
+                        <div class="mb-3">
+                            <span class="badge bg-success me-1">Python</span>
+                            <span class="badge bg-success me-1">Machine Learning</span>
+                            <span class="badge bg-success me-1">R</span>
+                        </div>
+                        <p class="small">PhD in Statistics with 8+ years in machine learning and data analysis. Expert in Python and R.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.8 (987 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">1,789 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Teacher 3 - Enhanced Profile -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T9.jpg" alt="Mike Wilson" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>Mike Wilson</h4>
+                        <p class="text-muted">Digital Marketing Guru</p>
+                        <div class="mb-3">
+                            <span class="badge bg-warning me-1">SEO</span>
+                            <span class="badge bg-warning me-1">PPC</span>
+                            <span class="badge bg-warning me-1">Social Media</span>
+                        </div>
+                        <p class="small">10+ years in digital marketing. Helped 100+ businesses grow through effective online strategies.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.7 (756 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">1,234 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Teacher 4 - New Addition -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T6.jpg" alt="Emily Davis" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>Emily Davis</h4>
+                        <p class="text-muted">UX/UI Design Expert</p>
+                        <div class="mb-3">
+                            <span class="badge bg-info me-1">Figma</span>
+                            <span class="badge bg-info me-1">Adobe XD</span>
+                            <span class="badge bg-info me-1">Sketch</span>
+                        </div>
+                        <p class="small">Former Google designer with 6+ years experience. Specializes in user experience and interface design.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.9 (543 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">987 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher 5 - New Addition -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T8.jpg" alt="David Chen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>David Chen</h4>
+                        <p class="text-muted">Mobile Development Specialist</p>
+                        <div class="mb-3">
+                            <span class="badge bg-secondary me-1">React Native</span>
+                            <span class="badge bg-secondary me-1">Flutter</span>
+                            <span class="badge bg-secondary me-1">iOS</span>
+                        </div>
+                        <p class="small">Senior mobile developer with 7+ years experience. Created 50+ apps with millions of downloads.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.8 (432 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">756 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher 6 - New Addition -->
+                <div class="col-md-4">
+                    <div class="teacher-profile fade-in">
+                        <div class="teacher-avatar">
+                            <img src="T7.jpg" alt="Lisa Rodriguez" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <h4>Lisa Rodriguez</h4>
+                        <p class="text-muted">Cybersecurity Expert</p>
+                        <div class="mb-3">
+                            <span class="badge bg-danger me-1">Ethical Hacking</span>
+                            <span class="badge bg-danger me-1">Network Security</span>
+                            <span class="badge bg-danger me-1">Penetration Testing</span>
+                        </div>
+                        <p class="small">Certified ethical hacker with 9+ years experience. Former security consultant for Fortune 500 companies.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="small">4.9 (321 reviews)</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-users text-info"></i>
+                                <span class="small">543 students</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-sm">View Profile</button>
+                            <button class="btn btn-outline-primary btn-sm">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>Load More Teachers
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Tab Content -->
+    <div id="community" class="tab-content">
+        <div class="container" style="margin-top: 100px;">
+            <h2 class="text-center mb-4">Community Hub</h2>
+            
+            <!-- Community Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                        <h4>2,456</h4>
+                        <p class="text-muted">Active Students</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i>
+                        <h4>45</h4>
+                        <p class="text-muted">Expert Teachers</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-comments fa-2x text-info mb-2"></i>
+                        <h4>1,234</h4>
+                        <p class="text-muted">Discussions</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-users-cog fa-2x text-warning mb-2"></i>
+                        <h4>89</h4>
+                        <p class="text-muted">Study Groups</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quick Actions</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100" onclick="openMessaging()">
+                                        <i class="fas fa-envelope me-2"></i>Send Message
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success w-100" onclick="createStudyGroup()">
+                                        <i class="fas fa-plus me-2"></i>Create Study Group
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info w-100" onclick="joinDiscussion()">
+                                        <i class="fas fa-comments me-2"></i>Join Discussion
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-warning w-100" onclick="scheduleMeeting()">
+                                        <i class="fas fa-calendar me-2"></i>Schedule Meeting
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Community Content -->
+            <div class="row">
+                <!-- Left Column - Messaging & Connections -->
+                <div class="col-md-4">
+                    <!-- Direct Messages -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-envelope me-2"></i>Direct Messages</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T4.jpg" alt="John Smith" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">John Smith</h6>
+                                        <small class="text-muted">Web Development Teacher</small>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">2</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Sarah Johnson</h6>
+                                        <small class="text-muted">Data Science Teacher</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T6.jpg" alt="Emily Davis" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Emily Davis</h6>
+                                        <small class="text-muted">UX/UI Design Teacher</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Groups -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-users me-2"></i>My Study Groups</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Web Dev Beginners</h6>
+                                    <small class="text-muted">12 members • Last active 2h ago</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Python Data Science</h6>
+                                    <small class="text-muted">8 members • Last active 1h ago</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">React Study Group</h6>
+                                    <small class="text-muted">15 members • Last active 30m ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Column - Forums & Discussions -->
+                <div class="col-md-5">
+                    <!-- Active Discussions -->
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0"><i class="fas fa-comments me-2"></i>Active Discussions</h6>
+                            <button class="btn btn-sm btn-outline-primary" onclick="startNewDiscussion()">New Discussion</button>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Best practices for React hooks?</h6>
+                                            <p class="text-muted small mb-2">Started by Alex Chen • 2 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-primary me-2">React</span>
+                                                <small class="text-muted">15 replies • 45 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T4.jpg" alt="Alex Chen" class="rounded-circle ms-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Python vs R for data analysis</h6>
+                                            <p class="text-muted small mb-2">Started by Sarah Johnson • 4 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-success me-2">Data Science</span>
+                                                <small class="text-muted">28 replies • 89 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle ms-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">UX Design principles for beginners</h6>
+                                            <p class="text-muted small mb-2">Started by Emily Davis • 6 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-info me-2">Design</span>
+                                                <small class="text-muted">12 replies • 67 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T6.jpg" alt="Emily Davis" class="rounded-circle ms-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collaboration Projects -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-project-diagram me-2"></i>Collaboration Projects</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h6>E-commerce Website</h6>
+                                        <p class="text-muted small">Full-stack development project</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="badge bg-primary me-1">React</span>
+                                                <span class="badge bg-secondary me-1">Node.js</span>
+                                                <span class="badge bg-info">MongoDB</span>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary">Join Project</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h6>Machine Learning Model</h6>
+                                        <p class="text-muted small">Predictive analytics project</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="badge bg-success me-1">Python</span>
+                                                <span class="badge bg-warning me-1">TensorFlow</span>
+                                                <span class="badge bg-info">Pandas</span>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-success">Join Project</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Events & Activities -->
+                <div class="col-md-3">
+                    <!-- Upcoming Events -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Upcoming Events</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Web Dev Workshop</h6>
+                                    <small class="text-muted">Tomorrow, 2:00 PM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by John Smith</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Data Science Meetup</h6>
+                                    <small class="text-muted">Friday, 6:00 PM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by Sarah Johnson</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Design Sprint</h6>
+                                    <small class="text-muted">Saturday, 10:00 AM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by Emily Davis</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Online Users -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-circle text-success me-2"></i>Online Now</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <img src="T4.jpg" alt="John Smith" class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;">
+                                    <small>John Smith</small>
+                                    <span class="badge bg-success ms-auto">Teacher</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;">
+                                    <small>Sarah Johnson</small>
+                                    <span class="badge bg-success ms-auto">Teacher</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <div class="rounded-circle me-2 bg-primary d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+                                        <small class="text-white">M</small>
+                                    </div>
+                                    <small>Mike Wilson</small>
+                                    <span class="badge bg-primary ms-auto">Student</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <div class="rounded-circle me-2 bg-info d-flex align-items-center justify-content-center" style="width: 25px; height: 25px;">
+                                        <small class="text-white">L</small>
+                                    </div>
+                                    <small>Lisa Rodriguez</small>
+                                    <span class="badge bg-primary ms-auto">Student</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
+            <div>
+                <span id="s" style="opacity:0.7; font-size:0.95rem; font-weight:600;">Tutor Group</span>
+            </div>
+            <div>
+                <a href="#" class="text-reset mx-2" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-reset mx-2" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-reset mx-2" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-reset mx-2" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+            <div style="font-size:0.85rem; opacity:0.7;">&copy; 2025 Tutor CMS Inc. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Set initial active tab
+            const homeLink = document.querySelector('[onclick="showTab(\'home\')"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+            
+            // Animate elements on scroll
+            animateOnScroll();
+        });
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Find and activate the correct nav link
+            const activeLink = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            }
+            
+            // Scroll to top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Course Enrollment
+        function enrollCourse(courseName) {
+            alert(`Thank you for your interest in ${courseName}! Please log in to enroll.`);
+        }
+
+        // Search Functionality
+        function searchCourses(event) {
+            event.preventDefault();
+            const searchTerm = event.target.querySelector('input').value;
+            alert(`Searching for courses: "${searchTerm}"`);
+        }
+
+        // Modal Functions
+        function showLoginModal() {
+            window.location.href = 'index2.html';
+        }
+
+        function showSignupModal() {
+            // For now, redirect to login page with a signup option
+            // You can create a separate signup page later
+            window.location.href = 'index2.html';
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Enhanced theme toggle with better visual feedback
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+                themeToggle.title = 'Switch to Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+                themeToggle.title = 'Switch to Light Mode';
+            }
+            
+            // Add a subtle animation effect
+            themeToggle.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        }
+
+        // Smooth scrolling for navigation links (only for non-tab links)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (!anchor.hasAttribute('onclick')) {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
+
+        // Community Functions
+        function openMessaging() {
+            alert('Messaging feature will open a chat interface to connect with teachers and students.');
+        }
+
+        function createStudyGroup() {
+            const groupName = prompt('Enter study group name:');
+            if (groupName) {
+                alert(`Study group "${groupName}" created successfully! You can now invite members.`);
+            }
+        }
+
+        function joinDiscussion() {
+            alert('You can now participate in community discussions. Choose a topic to get started!');
+        }
+
+        function scheduleMeeting() {
+            alert('Meeting scheduler will open. You can schedule 1-on-1 sessions with teachers or group study sessions.');
+        }
+
+        function startNewDiscussion() {
+            const topic = prompt('Enter discussion topic:');
+            if (topic) {
+                alert(`New discussion "${topic}" started! Other community members can now join the conversation.`);
+            }
+        }
+
+        // Real-time connectivity simulation
+        function updateOnlineStatus() {
+            const onlineUsers = document.querySelectorAll('.list-group-item .badge');
+            onlineUsers.forEach(user => {
+                if (Math.random() > 0.7) {
+                    user.classList.toggle('bg-success');
+                    user.classList.toggle('bg-secondary');
+                }
+            });
+        }
+
+        // Update online status every 30 seconds
+        setInterval(updateOnlineStatus, 30000);
+
+        // Add click handlers for community interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Message click handlers
+            document.querySelectorAll('.list-group-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.querySelector('h6')) {
+                        const name = this.querySelector('h6').textContent;
+                        alert(`Opening chat with ${name}`);
+                    }
+                });
+            });
+
+            // Study group click handlers
+            document.querySelectorAll('.card-body .list-group-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.querySelector('h6') && !this.querySelector('.badge')) {
+                        const groupName = this.querySelector('h6').textContent;
+                        alert(`Opening study group: ${groupName}`);
+                    }
+                });
+            });
+
+            // Initialize calendar
+            initializeCalendar();
+            updateTodaySchedule();
+        });
+
+        // Calendar Functions
+        let currentView = 'week';
+        let currentDate = new Date();
+
+        function initializeCalendar() {
+            generateMonthCalendar();
+            addCalendarEventListeners();
+        }
+
+        function changeView(view) {
+            currentView = view;
+            
+            // Hide all views
+            document.querySelectorAll('.calendar-view').forEach(v => v.style.display = 'none');
+            
+            // Show selected view
+            document.getElementById(view + 'View').style.display = 'block';
+            
+            // Update button states
+            document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update period text
+            updatePeriodText();
+        }
+
+        function updatePeriodText() {
+            const periodElement = document.getElementById('currentPeriod');
+            if (currentView === 'week') {
+                periodElement.textContent = 'This Week';
+            } else if (currentView === 'month') {
+                const month = currentDate.toLocaleString('default', { month: 'long' });
+                const year = currentDate.getFullYear();
+                periodElement.textContent = `${month} ${year}`;
+            } else {
+                periodElement.textContent = 'All Classes';
+            }
+        }
+
+        function previousPeriod() {
+            if (currentView === 'week') {
+                currentDate.setDate(currentDate.getDate() - 7);
+            } else if (currentView === 'month') {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                generateMonthCalendar();
+            }
+            updatePeriodText();
+        }
+
+        function nextPeriod() {
+            if (currentView === 'week') {
+                currentDate.setDate(currentDate.getDate() + 7);
+            } else if (currentView === 'month') {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                generateMonthCalendar();
+            }
+            updatePeriodText();
+        }
+
+        function generateMonthCalendar() {
+            const monthBody = document.getElementById('monthBody');
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+            
+            let html = '';
+            const today = new Date();
+            
+            for (let week = 0; week < 6; week++) {
+                for (let day = 0; day < 7; day++) {
+                    const currentDay = new Date(startDate);
+                    currentDay.setDate(startDate.getDate() + (week * 7) + day);
+                    
+                    const isToday = currentDay.toDateString() === today.toDateString();
+                    const isCurrentMonth = currentDay.getMonth() === month;
+                    const hasEvent = hasEventsOnDay(currentDay);
+                    
+                    html += `<div class="month-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''} ${!isCurrentMonth ? 'text-muted' : ''}">`;
+                    html += `<div class="day-number">${currentDay.getDate()}</div>`;
+                    
+                    if (hasEvent) {
+                        html += `<div class="day-event">Web Dev</div>`;
+                        html += `<div class="day-event">Data Science</div>`;
+                    }
+                    
+                    html += '</div>';
+                }
+            }
+            
+            monthBody.innerHTML = html;
+        }
+
+        function hasEventsOnDay(date) {
+            const dayOfWeek = date.getDay();
+            const dayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
+            
+            // Check if this day has scheduled classes
+            const schedule = {
+                'Monday': ['Web Development'],
+                'Tuesday': ['Data Science'],
+                'Wednesday': ['Web Development'],
+                'Thursday': ['Data Science'],
+                'Friday': ['Web Development'],
+                'Saturday': ['Digital Marketing'],
+                'Sunday': []
+            };
+            
+            return schedule[dayName] && schedule[dayName].length > 0;
+        }
+
+        function addCalendarEventListeners() {
+            // Add click listeners to calendar events
+            document.querySelectorAll('.calendar-cell.event').forEach(event => {
+                event.addEventListener('click', function() {
+                    const course = this.getAttribute('data-course');
+                    showEventDetails(course);
+                });
+            });
+        }
+
+        function showEventDetails(course) {
+            const instructors = {
+                'Web Development': 'John Smith',
+                'Data Science': 'Sarah Johnson',
+                'Digital Marketing': 'Mike Wilson'
+            };
+            
+            const rooms = {
+                'Web Development': 'Room 101',
+                'Data Science': 'Room 202',
+                'Digital Marketing': 'Room 303'
+            };
+            
+            alert(`Course: ${course}\nInstructor: ${instructors[course]}\nRoom: ${rooms[course]}\n\nClick OK to join the class or view details.`);
+        }
+
+        function updateTodaySchedule() {
+            const today = new Date();
+            const dayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][today.getDay()];
+            
+            const todaySchedule = document.getElementById('todaySchedule');
+            const schedule = {
+                'Monday': [
+                    { name: 'Web Development', time: '2:00 PM - 4:00 PM', instructor: 'John Smith' }
+                ],
+                'Tuesday': [
+                    { name: 'Data Science', time: '10:00 AM - 12:00 PM', instructor: 'Sarah Johnson' }
+                ],
+                'Wednesday': [
+                    { name: 'Web Development', time: '2:00 PM - 4:00 PM', instructor: 'John Smith' }
+                ],
+                'Thursday': [
+                    { name: 'Data Science', time: '10:00 AM - 12:00 PM', instructor: 'Sarah Johnson' }
+                ],
+                'Friday': [
+                    { name: 'Web Development', time: '2:00 PM - 4:00 PM', instructor: 'John Smith' }
+                ],
+                'Saturday': [
+                    { name: 'Digital Marketing', time: '9:00 AM - 1:00 PM', instructor: 'Mike Wilson' }
+                ],
+                'Sunday': []
+            };
+            
+            const todayClasses = schedule[dayName] || [];
+            
+            if (todayClasses.length === 0) {
+                todaySchedule.innerHTML = '<div class="list-group-item p-3 text-center text-muted">No classes scheduled for today</div>';
+            }
+        }
+
+        // Schedule Management Functions
+        function addNewSchedule() {
+            const courseName = prompt('Enter course name:');
+            if (courseName) {
+                const instructor = prompt('Enter instructor name:');
+                const time = prompt('Enter class time (e.g., 2:00 PM - 4:00 PM):');
+                const days = prompt('Enter days (e.g., Monday, Wednesday, Friday):');
+                
+                if (instructor && time && days) {
+                    alert(`New schedule added:\nCourse: ${courseName}\nInstructor: ${instructor}\nTime: ${time}\nDays: ${days}`);
+                }
+            }
+        }
+
+        function exportSchedule() {
+            alert('Schedule exported successfully! You can download it as PDF or CSV.');
+        }
+
+        function setReminder() {
+            const reminderTime = prompt('Set reminder for (minutes before class):', '15');
+            if (reminderTime) {
+                alert(`Reminder set for ${reminderTime} minutes before each class.`);
+            }
+        }
+
+        function shareSchedule() {
+            alert('Schedule shared! You can share via email, social media, or generate a public link.');
+        }
+
+        function requestChange() {
+            const reason = prompt('Please provide a reason for the schedule change request:');
+            if (reason) {
+                alert('Schedule change request submitted. You will be notified once it\'s reviewed.');
+            }
+        }
+    </script>
+</body>
+</html>

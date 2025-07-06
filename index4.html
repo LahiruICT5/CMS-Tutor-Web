@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b99ff;
+            --primary-dark: #10bad8;
+            --secondary: #1e1e1c;
+            --light-gray: #f7f9fa;
+            --border-color: #d1d7dc;
+            --text-dark: #2d2f31;
+        }
+        
+        body {
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+        }
+        
+        .navbar {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .search-form {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .search-form .form-control {
+            border-radius: 0;
+            border-right: none;
+        }
+        
+        .search-form .btn {
+            border-radius: 0;
+            background-color: white;
+            border-color: #ced4da;
+            border-left: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .hero {
+            background-color: var(--light-gray);
+            padding: 3rem 0;
+        }
+        
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        
+        .category-card {
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        
+        .category-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            color: var(--primary);
+        }
+        
+        .card {
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-top {
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .course-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .course-rating {
+            color: #eb8a2f;
+        }
+        
+        .instructor-avatar {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .sidebar {
+            background-color: var(--light-gray);
+            border-right: 1px solid var(--border-color);
+            min-height: 100vh;
+        }
+        
+        .sidebar .nav-link {
+            color: var(--text-dark);
+            padding: 0.75rem 1rem;
+            border-radius: 0;
+        }
+        
+        .sidebar .nav-link:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar .nav-link.active {
+            background-color: rgba(164, 53, 240, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .sidebar .nav-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .course-content-list .list-group-item {
+            cursor: pointer;
+        }
+        
+        .course-content-list .list-group-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .course-content-list .list-group-item.active {
+            background-color: rgba(164, 53, 240, 0.1);
+            color: var(--primary);
+            border-color: var(--border-color);
+        }
+        
+        .curriculum-section {
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+        
+        .curriculum-header {
+            background-color: var(--light-gray);
+            padding: 1rem;
+            cursor: pointer;
+        }
+        
+        .curriculum-lectures {
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        .curriculum-lectures li {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .lecture-duration {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .review-card {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-card:last-child {
+            border-bottom: none;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--primary);
+        }
+        
+        .dashboard-stat {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .dashboard-stat i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .dashboard-stat h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .dashboard-stat p {
+            margin: 0;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <div class="logo-container">
+                <img src="logo.png" width="100" height="100" alt="Tutor Logo">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <form class="search-form d-flex mx-auto">
+                    <input class="form-control" type="search" placeholder="Search for anything" aria-label="Search">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index5.html">Teachers on Tutor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="far fa-heart"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pages Container -->
+    <div class="container-fluid p-0">
+        <!-- Home Page -->
+        <div id="home-page">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card p-4 shadow">
+                                <h1>Learn with confidence</h1>
+                                <p class="lead">Master new skills with courses from expert instructors. Join millions of students already learning on Tutor.</p>
+                                <form class="mt-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="What do you want to learn?">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search me-2"></i> Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-none d-md-block">
+                            <img src="T1.jpg" width="500" height="300" alt="Learning illustration" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="container my-5">
+                <h2 class="mb-4">Top Categories</h2>
+                <div class="row g-4">
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="category-card d-block text-center p-4">
+                            <i class="fas fa-laptop-code fa-3x mb-3"></i>
+                            <h5>Web Development</h5>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="category-card d-block text-center p-4">
+                            <i class="fas fa-chart-line fa-3x mb-3"></i>
+                            <h5>Data Science</h5>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="category-card d-block text-center p-4">
+                            <i class="fas fa-mobile-alt fa-3x mb-3"></i>
+                            <h5>Mobile Development</h5>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a href="#" class="category-card d-block text-center p-4">
+                            <i class="fas fa-paint-brush fa-3x mb-3"></i>
+                            <h5>Design</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Courses Section -->
+            <div class="container my-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Featured Classes</h2>
+                    <a href="#" class="btn btn-outline-primary">View All</a>
+                </div>
+                <div class="row g-4">
+                    <!-- Course Card 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100">
+                            <img src="T2.jpg" width="300" height="200" class="card-img-top" alt="Course thumbnail">
+                            <div class="card-body">
+                                <h5 class="card-title">Complete Web Development Bootcamp</h5>
+                                <p class="card-text text-muted">John Doe</p>
+                                <div class="course-rating mb-2">
+                                    <span class="fw-bold">4.8</span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted">(2,345)</span>
+                                </div>
+                                <span class="badge bg-success">Bestseller</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course Card 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100">
+                            <img src="T3.jpeg" width="300" height="200" class="card-img-top" alt="Course thumbnail">
+                            <div class="card-body">
+                                <h5 class="card-title">Python for Data Science and Machine Learning</h5>
+                                <p class="card-text text-muted">Jane Smith</p>
+                                <div class="course-rating mb-2">
+                                    <span class="fw-bold">4.9</span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-muted">(1,820)</span>
+                                </div>
+                                <span class="badge bg-danger">Hot & New
