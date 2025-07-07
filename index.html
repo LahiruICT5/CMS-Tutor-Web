@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -341,21 +342,21 @@
             .hero h1 {
                 font-size: 28px;
             }
-            
+
             .hero p {
                 font-size: 16px;
             }
-            
+
             .search-form {
                 flex-direction: column;
                 border-radius: 10px;
             }
-            
+
             .search-form input,
             .search-form button {
                 border-radius: 0;
             }
-            
+
             .courses h2 {
                 font-size: 2rem;
             }
@@ -390,6 +391,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -440,6 +442,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -447,58 +450,57 @@
             <a class="navbar-brand" href="#home">
                 <img src="logo.png" alt="Tutor Logo" onerror="this.style.display='none'">
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#home" onclick="showTab('home')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#dashboard" onclick="showTab('dashboard')">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#schedules" onclick="showTab('schedules')">Class Schedules</a>
+                        <a class="nav-link" href="#institutes" onclick="showTab('institutes')">Institutes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#teachers" onclick="showTab('teachers')">Teachers</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#community" onclick="showTab('community')">Community</a>
+                    </li>
                 </ul>
-                
+
                 <div class="d-flex align-items-center">
                     <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
                         <i class="fas fa-moon"></i>
                     </button>
                     <a href="#login" class="btn btn-auth btn-login" onclick="showLoginModal()">Login</a>
-                    <a href="#signup" class="btn btn-auth btn-signup" onclick="showSignupModal()">Sign Up</a>
+                </div>
             </div>
-            </div>
-            </div>
-        </nav>
+        </div>
+    </nav>
 
     <!-- Home Tab Content -->
     <div id="home" class="tab-content active">
-    <!-- Hero Section -->
-    <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero">
             <div class="hero-content">
                 <div class="container">
                     <h1 class="fade-in">Learn Anytime, Anywhere</h1>
                     <p class="fade-in">Join thousands of students and start learning today.</p>
                     <div class="search-container fade-in">
                         <form class="search-form" onsubmit="searchCourses(event)">
-            <input type="text" placeholder="Search for courses..." required>
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
+                            <input type="text" placeholder="Search for courses..." required>
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
-    </section>
+        </section>
 
-    <!-- Courses Section -->
-    <section class="courses">
+        <!-- Courses Section -->
+        <section class="courses">
             <div class="container">
                 <h2 class="fade-in">Popular Classes</h2>
                 <div class="row g-4">
@@ -506,7 +508,8 @@
                         <div class="course-card h-100">
                             <div class="course-card-body">
                                 <h3><i class="fas fa-code me-2"></i>Web Development</h3>
-                                <p>Learn HTML, CSS, JavaScript & more. Build responsive websites and web applications from scratch.</p>
+                                <p>Learn HTML, CSS, JavaScript & more. Build responsive websites and web applications
+                                    from scratch.</p>
                                 <button class="btn-course" onclick="enrollCourse('Web Development')">Enroll Now</button>
                             </div>
                         </div>
@@ -524,8 +527,10 @@
                         <div class="course-card h-100">
                             <div class="course-card-body">
                                 <h3><i class="fas fa-bullhorn me-2"></i>Digital Marketing</h3>
-                                <p>SEO, PPC, Social Media Strategies. Learn to market effectively in the digital age.</p>
-                                <button class="btn-course" onclick="enrollCourse('Digital Marketing')">Enroll Now</button>
+                                <p>SEO, PPC, Social Media Strategies. Learn to market effectively in the digital age.
+                                </p>
+                                <button class="btn-course" onclick="enrollCourse('Digital Marketing')">Enroll
+                                    Now</button>
                             </div>
                         </div>
                     </div>
@@ -534,66 +539,44 @@
         </section>
     </div>
 
-    <!-- Dashboard Tab Content -->
-    <div id="dashboard" class="tab-content">
+    <!-- Institutes Tab Content -->
+    <div id="institutes" class="tab-content">
         <div class="container" style="margin-top: 100px;">
-            <h2 class="text-center mb-4">Student Dashboard</h2>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="dashboard-content">
-                        <h4><i class="fas fa-book me-2"></i>My Courses</h4>
-                        <div class="course-progress mt-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span>Web Development</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 75%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span>Data Science</span>
-                                <span>45%</span>
-                            </div>
-                            <div class="progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 45%"></div>
-                            </div>
+            <h2 class="text-center mb-4">Our Partner Institutes</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="teacher-profile">
+                        <div class="teacher-avatar">
+                            <i class="fas fa-university"></i>
                         </div>
+                        <h4>Global Tech Institute</h4>
+                        <p class="text-muted">Colombo, Sri Lanka</p>
+                        <p>Leading provider of IT and business education with modern facilities and experienced faculty.
+                        </p>
+                        <button class="btn btn-primary btn-sm">View Details</button>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="dashboard-content">
-                        <h4><i class="fas fa-calendar me-2"></i>Upcoming Classes</h4>
-                        <div class="mt-3">
-                            <p><strong>Today:</strong> JavaScript Basics - 2:00 PM</p>
-                            <p><strong>Tomorrow:</strong> Python Data Analysis - 10:00 AM</p>
-                            <p><strong>Friday:</strong> React Components - 3:00 PM</p>
+                    <div class="teacher-profile">
+                        <div class="teacher-avatar">
+                            <i class="fas fa-university"></i>
                         </div>
+                        <h4>Sunrise Academy</h4>
+                        <p class="text-muted">Kandy, Sri Lanka</p>
+                        <p>Renowned for science and engineering programs, offering hands-on learning and research
+                            opportunities.</p>
+                        <button class="btn btn-primary btn-sm">View Details</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Class Schedules Tab Content -->
-    <div id="schedules" class="tab-content">
-        <div class="container" style="margin-top: 100px;">
-            <h2 class="text-center mb-4">Class Schedules</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="schedule-item">
-                        <h5>Web Development Fundamentals</h5>
-                        <p><i class="fas fa-clock me-2"></i>Monday, Wednesday, Friday - 2:00 PM - 4:00 PM</p>
-                        <p><i class="fas fa-user me-2"></i>Instructor: John Smith</p>
-                    </div>
-                    <div class="schedule-item">
-                        <h5>Data Science with Python</h5>
-                        <p><i class="fas fa-clock me-2"></i>Tuesday, Thursday - 10:00 AM - 12:00 PM</p>
-                        <p><i class="fas fa-user me-2"></i>Instructor: Sarah Johnson</p>
-                    </div>
-                    <div class="schedule-item">
-                        <h5>Digital Marketing Strategy</h5>
-                        <p><i class="fas fa-clock me-2"></i>Saturday - 9:00 AM - 1:00 PM</p>
-                        <p><i class="fas fa-user me-2"></i>Instructor: Mike Wilson</p>
+                <div class="col-md-4">
+                    <div class="teacher-profile">
+                        <div class="teacher-avatar">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h4>Metro Business School</h4>
+                        <p class="text-muted">Galle, Sri Lanka</p>
+                        <p>Specializes in business management and entrepreneurship with strong industry connections.</p>
+                        <button class="btn btn-primary btn-sm">View Details</button>
                     </div>
                 </div>
             </div>
@@ -612,7 +595,8 @@
                         </div>
                         <h4>John Smith</h4>
                         <p class="text-muted">Web Development Expert</p>
-                        <p>5+ years experience in full-stack development. Specializes in React, Node.js, and modern web technologies.</p>
+                        <p>5+ years experience in full-stack development. Specializes in React, Node.js, and modern web
+                            technologies.</p>
                         <button class="btn btn-primary btn-sm">View Profile</button>
                     </div>
                 </div>
@@ -623,7 +607,8 @@
                         </div>
                         <h4>Sarah Johnson</h4>
                         <p class="text-muted">Data Science Specialist</p>
-                        <p>PhD in Statistics with 8+ years in machine learning and data analysis. Expert in Python and R.</p>
+                        <p>PhD in Statistics with 8+ years in machine learning and data analysis. Expert in Python and
+                            R.</p>
                         <button class="btn btn-primary btn-sm">View Profile</button>
                     </div>
                 </div>
@@ -634,8 +619,301 @@
                         </div>
                         <h4>Mike Wilson</h4>
                         <p class="text-muted">Digital Marketing Guru</p>
-                        <p>10+ years in digital marketing. Helped 100+ businesses grow through effective online strategies.</p>
+                        <p>10+ years in digital marketing. Helped 100+ businesses grow through effective online
+                            strategies.</p>
                         <button class="btn btn-primary btn-sm">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Tab Content -->
+    <div id="community" class="tab-content">
+        <div class="container" style="margin-top: 100px;">
+            <h2 class="text-center mb-4">Community Hub</h2>
+            <!-- Community Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                        <h4>2,456</h4>
+                        <p class="text-muted">Active Students</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i>
+                        <h4>45</h4>
+                        <p class="text-muted">Expert Teachers</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-comments fa-2x text-info mb-2"></i>
+                        <h4>1,234</h4>
+                        <p class="text-muted">Discussions</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-3">
+                        <i class="fas fa-users-cog fa-2x text-warning mb-2"></i>
+                        <h4>89</h4>
+                        <p class="text-muted">Study Groups</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quick Actions</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100"><i class="fas fa-envelope me-2"></i>Send
+                                        Message</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success w-100"><i class="fas fa-plus me-2"></i>Create Study
+                                        Group</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info w-100"><i class="fas fa-comments me-2"></i>Join
+                                        Discussion</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-warning w-100"><i class="fas fa-calendar me-2"></i>Schedule
+                                        Meeting</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Community Content -->
+            <div class="row">
+                <!-- Left Column - Messaging & Connections -->
+                <div class="col-md-4">
+                    <!-- Direct Messages -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-envelope me-2"></i>Direct Messages</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T4.jpg" alt="John Smith" class="rounded-circle me-3"
+                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">John Smith</h6>
+                                        <small class="text-muted">Web Development Teacher</small>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">2</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle me-3"
+                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Sarah Johnson</h6>
+                                        <small class="text-muted">Data Science Teacher</small>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-3">
+                                    <img src="T6.jpg" alt="Emily Davis" class="rounded-circle me-3"
+                                        style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Emily Davis</h6>
+                                        <small class="text-muted">UX/UI Design Teacher</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Study Groups -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-users me-2"></i>My Study Groups</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Web Dev Beginners</h6>
+                                    <small class="text-muted">12 members • Last active 2h ago</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Python Data Science</h6>
+                                    <small class="text-muted">8 members • Last active 1h ago</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">React Study Group</h6>
+                                    <small class="text-muted">15 members • Last active 30m ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Center Column - Forums & Discussions -->
+                <div class="col-md-5">
+                    <!-- Active Discussions -->
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0"><i class="fas fa-comments me-2"></i>Active Discussions</h6>
+                            <button class="btn btn-sm btn-outline-primary">New Discussion</button>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Best practices for React hooks?</h6>
+                                            <p class="text-muted small mb-2">Started by Alex Chen • 2 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-primary me-2">React</span>
+                                                <small class="text-muted">15 replies • 45 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T4.jpg" alt="Alex Chen" class="rounded-circle ms-2"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Python vs R for data analysis</h6>
+                                            <p class="text-muted small mb-2">Started by Sarah Johnson • 4 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-success me-2">Data Science</span>
+                                                <small class="text-muted">28 replies • 89 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle ms-2"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">UX Design principles for beginners</h6>
+                                            <p class="text-muted small mb-2">Started by Emily Davis • 6 hours ago</p>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge bg-info me-2">Design</span>
+                                                <small class="text-muted">12 replies • 67 views</small>
+                                            </div>
+                                        </div>
+                                        <img src="T6.jpg" alt="Emily Davis" class="rounded-circle ms-2"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Collaboration Projects -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-project-diagram me-2"></i>Collaboration Projects</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h6>E-commerce Website</h6>
+                                        <p class="text-muted small">Full-stack development project</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="badge bg-primary me-1">React</span>
+                                                <span class="badge bg-secondary me-1">Node.js</span>
+                                                <span class="badge bg-info">MongoDB</span>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary">Join Project</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="border rounded p-3">
+                                        <h6>Machine Learning Model</h6>
+                                        <p class="text-muted small">Predictive analytics project</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="badge bg-success me-1">Python</span>
+                                                <span class="badge bg-warning me-1">TensorFlow</span>
+                                                <span class="badge bg-info">Pandas</span>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-success">Join Project</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column - Events & Activities -->
+                <div class="col-md-3">
+                    <!-- Upcoming Events -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Upcoming Events</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Web Dev Workshop</h6>
+                                    <small class="text-muted">Tomorrow, 2:00 PM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by John Smith</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Data Science Meetup</h6>
+                                    <small class="text-muted">Friday, 6:00 PM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by Sarah Johnson</small>
+                                </div>
+                                <div class="list-group-item p-3">
+                                    <h6 class="mb-1">Design Sprint</h6>
+                                    <small class="text-muted">Saturday, 10:00 AM</small>
+                                    <br>
+                                    <small class="text-primary">Hosted by Emily Davis</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Online Users -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-circle text-success me-2"></i>Online Now</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <img src="T4.jpg" alt="John Smith" class="rounded-circle me-2"
+                                        style="width: 25px; height: 25px; object-fit: cover;">
+                                    <small>John Smith</small>
+                                    <span class="badge bg-success ms-auto">Teacher</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <img src="T5.jpg" alt="Sarah Johnson" class="rounded-circle me-2"
+                                        style="width: 25px; height: 25px; object-fit: cover;">
+                                    <small>Sarah Johnson</small>
+                                    <span class="badge bg-success ms-auto">Teacher</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <div class="rounded-circle me-2 bg-primary d-flex align-items-center justify-content-center"
+                                        style="width: 25px; height: 25px;">
+                                        <small class="text-white">M</small>
+                                    </div>
+                                    <small>Mike Wilson</small>
+                                    <span class="badge bg-primary ms-auto">Student</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center p-2">
+                                    <div class="rounded-circle me-2 bg-info d-flex align-items-center justify-content-center"
+                                        style="width: 25px; height: 25px;">
+                                        <small class="text-white">L</small>
+                                    </div>
+                                    <small>Lisa Rodriguez</small>
+                                    <span class="badge bg-primary ms-auto">Student</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -665,21 +943,21 @@
 
 
         // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
             const themeToggle = document.getElementById('themeToggle');
-            
+
             if (savedTheme === 'dark') {
                 document.body.setAttribute('data-theme', 'dark');
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
-            
+
             // Set initial active tab
             const homeLink = document.querySelector('[onclick="showTab(\'home\')"]');
             if (homeLink) {
                 homeLink.classList.add('active');
             }
-            
+
             // Animate elements on scroll
             animateOnScroll();
         });
@@ -689,26 +967,26 @@
             // Hide all tab contents
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
-            
+
             // Show selected tab
             document.getElementById(tabName).classList.add('active');
-            
+
             // Update active nav link
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => link.classList.remove('active'));
-            
+
             // Find and activate the correct nav link
             const activeLink = document.querySelector(`[onclick="showTab('${tabName}')"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
             }
-            
+
             // Close mobile menu if open
             const navbarCollapse = document.getElementById('navbarNav');
             if (navbarCollapse.classList.contains('show')) {
                 navbarCollapse.classList.remove('show');
             }
-            
+
             // Scroll to top of the page
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -739,7 +1017,7 @@
         // Animate elements on scroll
         function animateOnScroll() {
             const elements = document.querySelectorAll('.fade-in');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -747,7 +1025,7 @@
                     }
                 });
             });
-            
+
             elements.forEach(element => {
                 observer.observe(element);
             });
@@ -757,7 +1035,7 @@
         function toggleTheme() {
             const body = document.body;
             const themeToggle = document.getElementById('themeToggle');
-            
+
             if (body.getAttribute('data-theme') === 'dark') {
                 body.removeAttribute('data-theme');
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
@@ -769,7 +1047,7 @@
                 localStorage.setItem('theme', 'dark');
                 themeToggle.title = 'Switch to Light Mode';
             }
-            
+
             // Add a subtle animation effect
             themeToggle.style.transform = 'rotate(180deg)';
             setTimeout(() => {
@@ -793,4 +1071,5 @@
         });
     </script>
 </body>
+
 </html>
