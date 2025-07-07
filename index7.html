@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Dashboard - Class Management System</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding-top: 40px;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .sidebar .logo {
+            width: 70px;
+            display: block;
+            margin: 0 auto 30px auto;
+        }
+
+        .content-area {
+            padding: 40px 30px;
+        }
+
+        .dashboard-cards .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.08);
+            text-align: center;
+        }
+
+        .dashboard-cards .card i {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .table thead th {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <img src="logo.png" alt="Institute Logo" class="logo mb-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('dashboard')"><i
+                                class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('teachers')"><i
+                                class="fas fa-chalkboard-teacher me-2"></i>Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('students')"><i
+                                class="fas fa-user-graduate me-2"></i>Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('classes')"><i
+                                class="fas fa-book-open me-2"></i>Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('schedules')"><i
+                                class="fas fa-calendar-alt me-2"></i>Schedules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('announcements')"><i
+                                class="fas fa-bullhorn me-2"></i>Announcements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('feedback')"><i
+                                class="fas fa-comments me-2"></i>Feedback Hub</a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link" href="#" onclick="showSection('profile')"><i
+                                class="fas fa-user-cog me-2"></i>Profile/Settings</a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link" href="index2.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </li>
+                </ul>
+        </nav>
+            <!-- Main Content -->
+            <main class="col-md-10 ms-sm-auto content-area">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section">
+                    <div class="section-title">Institute Dashboard</div>
+                    <div class="row dashboard-cards mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-user-graduate text-primary"></i>
+                                <h4>320</h4>
+                                <p class="mb-0">Students</p>
+                                </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-chalkboard-teacher text-success"></i>
+                                <h4>18</h4>
+                                <p class="mb-0">Teachers</p>
+                    </div>
+                    </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-book-open text-info"></i>
+                                <h4>24</h4>
+                                <p class="mb-0">Classes</p>
+                </div>
+            </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-calendar-alt text-warning"></i>
+                                <h4>5</h4>
+                                <p class="mb-0">Upcoming Schedules</p>
+        </div>
+                </div>
+                </div>
+                </div>
+                <!-- Teachers Section -->
+                <div id="teachers-section" style="display:none;">
+                    <div class="section-title">Manage Teachers</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Smith</td>
+                                <td>john@institute.com</td>
+                                <td>Web Development</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>sarah@institute.com</td>
+                                <td>Data Science</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-2">Add Teacher</button>
+                </div>
+                <!-- Students Section -->
+                <div id="students-section" style="display:none;">
+                    <div class="section-title">Manage Students</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Enrolled Class</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alice Brown</td>
+                                <td>alice@student.com</td>
+                                <td>Web Development</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                            <tr>
+                                <td>Bob Lee</td>
+                                <td>bob@student.com</td>
+                                <td>Data Science</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-2">Add Student</button>
+            </div>
+                <!-- Classes Section -->
+                <div id="classes-section" style="display:none;">
+                    <div class="section-title">Manage Classes</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Teacher</th>
+                                <th>Schedule</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web Development</td>
+                                <td>John Smith</td>
+                                <td>Mon, Wed, Fri 2-4PM</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                            <tr>
+                                <td>Data Science</td>
+                                <td>Sarah Johnson</td>
+                                <td>Tue, Thu 10-12AM</td>
+                                <td><button class="btn btn-sm btn-info">Edit</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-2">Create Classroom</button>
+        </div>
+                <!-- Schedules Section -->
+                <div id="schedules-section" style="display:none;">
+                    <div class="section-title">Class Schedules</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Teacher</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web Development</td>
+                                <td>John Smith</td>
+                                <td>Monday</td>
+                                <td>2:00 PM - 4:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Data Science</td>
+                                <td>Sarah Johnson</td>
+                                <td>Tuesday</td>
+                                <td>10:00 AM - 12:00 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+                <!-- Announcements Section -->
+                <div id="announcements-section" style="display:none;">
+                    <div class="section-title">Institute Announcements</div>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Welcome to the new semester! Classes start next week.</li>
+                        <li class="list-group-item">Staff meeting on Friday at 3:00 PM in Room 101.</li>
+                    </ul>
+                    <button class="btn btn-primary">Add Announcement</button>
+                            </div>
+                <!-- Feedback Hub Section -->
+                <div id="feedback-section" style="display:none;">
+                    <div class="section-title">Feedback Hub</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Feedback</th>
+                                <th>Respond</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alice Brown</td>
+                                <td>Web Development</td>
+                                <td>Great class, very interactive!</td>
+                                <td><button class="btn btn-sm btn-info">Respond</button></td>
+                            </tr>
+                            <tr>
+                                <td>Bob Lee</td>
+                                <td>Data Science</td>
+                                <td>Could you share more examples?</td>
+                                <td><button class="btn btn-sm btn-info">Respond</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                <!-- Profile/Settings Section -->
+                <div id="profile-section" style="display:none;">
+                    <div class="section-title">Institute Profile & Settings</div>
+                    <form style="max-width:500px;">
+                        <div class="mb-3">
+                            <label class="form-label">Institute Name</label>
+                            <input type="text" class="form-control" value="Global Tech Institute">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="info@globaltech.edu">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" value="123 Main St, Colombo">
+                        </div>
+                        <button class="btn btn-success">Save Changes</button>
+                    </form>
+                            </div>
+            </main>
+                            </div>
+                        </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showSection(section) {
+            const sections = ['dashboard', 'teachers', 'students', 'classes', 'schedules', 'announcements', 'feedback', 'profile'];
+            sections.forEach(s => {
+                document.getElementById(s + '-section').style.display = (s === section) ? '' : 'none';
+            });
+            // Update active nav link
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => {
+                if (link.textContent.trim().toLowerCase().includes(section)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

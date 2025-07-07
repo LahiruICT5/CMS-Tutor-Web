@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Dashboard - Class Management System</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding-top: 40px;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .sidebar .logo {
+            width: 70px;
+            display: block;
+            margin: 0 auto 30px auto;
+        }
+
+        .content-area {
+            padding: 40px 30px;
+        }
+
+        .dashboard-cards .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.08);
+            text-align: center;
+        }
+
+        .dashboard-cards .card i {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .table thead th {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <img src="logo.png" alt="Instructor Logo" class="logo mb-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('dashboard')"><i
+                                class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('classes')"><i
+                                class="fas fa-chalkboard me-2"></i>My Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('materials')"><i
+                                class="fas fa-book me-2"></i>Study Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('assignments')"><i
+                                class="fas fa-tasks me-2"></i>Assignments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('feedback')"><i
+                                class="fas fa-comments me-2"></i>Feedback Hub</a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link" href="#" onclick="showSection('profile')"><i
+                                class="fas fa-user-cog me-2"></i>Profile/Settings</a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link" href="index2.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Main Content -->
+            <main class="col-md-10 ms-sm-auto content-area">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section">
+                    <div class="section-title">Instructor Dashboard</div>
+                    <div class="row dashboard-cards mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-chalkboard text-primary"></i>
+                                <h4>4</h4>
+                                <p class="mb-0">My Classes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-user-graduate text-success"></i>
+                                <h4>120</h4>
+                                <p class="mb-0">Students</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-tasks text-info"></i>
+                                <h4>8</h4>
+                                <p class="mb-0">Assignments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card p-3">
+                                <i class="fas fa-comments text-warning"></i>
+                                <h4>15</h4>
+                                <p class="mb-0">Feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- My Classes Section -->
+                <div id="classes-section" style="display:none;">
+                    <div class="section-title">My Classes</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Advertise</th>
+                                <th>Create Classroom</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web Development</td>
+                                <td><button class="btn btn-sm btn-info">Advertise</button></td>
+                                <td><button class="btn btn-sm btn-success">Create</button></td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>Data Science</td>
+                                <td><button class="btn btn-sm btn-info">Advertise</button></td>
+                                <td><button class="btn btn-sm btn-success">Create</button></td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Study Materials Section -->
+                <div id="materials-section" style="display:none;">
+                    <div class="section-title">Study Materials</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Class</th>
+                                <th>Upload Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HTML Basics.pdf</td>
+                                <td>Web Development</td>
+                                <td>2024-06-01</td>
+                                <td><button class="btn btn-sm btn-info">View</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                            <tr>
+                                <td>Data Science Intro.pptx</td>
+                                <td>Data Science</td>
+                                <td>2024-06-02</td>
+                                <td><button class="btn btn-sm btn-info">View</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-2">Upload Material</button>
+                </div>
+                <!-- Assignments Section -->
+                <div id="assignments-section" style="display:none;">
+                    <div class="section-title">Assignments</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Class</th>
+                                <th>Due Date</th>
+                                <th>Approve Marks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Assignment 1</td>
+                                <td>Web Development</td>
+                                <td>2024-06-10</td>
+                                <td><button class="btn btn-sm btn-success">Approve</button></td>
+                                <td><button class="btn btn-sm btn-info">View</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                            <tr>
+                                <td>Assignment 2</td>
+                                <td>Data Science</td>
+                                <td>2024-06-12</td>
+                                <td><button class="btn btn-sm btn-success">Approve</button></td>
+                                <td><button class="btn btn-sm btn-info">View</button> <button
+                                        class="btn btn-sm btn-danger">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-2">Create Assignment</button>
+                </div>
+                <!-- Feedback Hub Section -->
+                <div id="feedback-section" style="display:none;">
+                    <div class="section-title">Feedback Hub</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Feedback</th>
+                                <th>Respond</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alice Brown</td>
+                                <td>Web Development</td>
+                                <td>Great class, very interactive!</td>
+                                <td><button class="btn btn-sm btn-info">Respond</button></td>
+                            </tr>
+                            <tr>
+                                <td>Bob Lee</td>
+                                <td>Data Science</td>
+                                <td>Could you share more examples?</td>
+                                <td><button class="btn btn-sm btn-info">Respond</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Profile/Settings Section -->
+                <div id="profile-section" style="display:none;">
+                    <div class="section-title">Instructor Profile & Settings</div>
+                    <form style="max-width:500px;">
+                        <div class="mb-3">
+                            <label class="form-label">Instructor Name</label>
+                            <input type="text" class="form-control" value="John Smith">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="john@institute.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Expertise</label>
+                            <input type="text" class="form-control" value="Web Development">
+                        </div>
+                        <button class="btn btn-success">Save Changes</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showSection(section) {
+            const sections = ['dashboard', 'classes', 'materials', 'assignments', 'feedback', 'profile'];
+            sections.forEach(s => {
+                document.getElementById(s + '-section').style.display = (s === section) ? '' : 'none';
+            });
+            // Update active nav link
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => {
+                if (link.textContent.trim().toLowerCase().includes(section)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
