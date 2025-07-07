@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,7 +149,9 @@
         }
         
         /* Card Styles */
-        .profile-card, .post-card, .sidebar-card {
+        .profile-card,
+        .post-card,
+        .sidebar-card {
             background: var(--card-bg);
             border-radius: 20px;
             box-shadow: var(--shadow);
@@ -157,7 +160,9 @@
             overflow: hidden;
         }
 
-        .profile-card:hover, .post-card:hover, .sidebar-card:hover {
+        .profile-card:hover,
+        .post-card:hover,
+        .sidebar-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
@@ -583,9 +588,17 @@
         }
         
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
         
         /* Animation Classes */
@@ -623,6 +636,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top">
@@ -632,298 +646,134 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="position-relative mx-auto">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="form-control search-bar" placeholder="Search for teachers, students">
-                </div>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <i class="fas fa-home"></i>
-                            <span>Home</span>
+                        <a class="nav-link active" href="#about">
+                            <i class="fas fa-user"></i>
+                            <span>About</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link position-relative" href="#">
-                            <i class="fas fa-bell"></i>
-                            <span>Notifications</span>
-                            <span class="notification-counter">5</span>
+                        <a class="nav-link" href="#feedbacks">
+                            <i class="fas fa-comments"></i>
+                            <span>Feedbacks</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-comment-dots"></i>
-                            <span>Messages</span>
+                        <a class="nav-link" href="#materials">
+                            <i class="fas fa-book"></i>
+                            <span>Lesson Materials</span>
                         </a>
                     </li>
-                    <li class="nav-item ms-2">
-                        <button class="btn btn-primary" onclick="showPostModal()">
-                            <span><i class="fas fa-plus me-1"></i> Post</span>
-                        </button>
-                    </li>
-                    <li class="nav-item ms-2">
+                </ul>
                         <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" title="Toggle theme">
                             <i class="fas fa-moon"></i>
                         </button>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="container py-4">
-        <div class="row">
-            <!-- Left Sidebar -->
-            <div class="col-lg-3">
-                <!-- Profile Card -->
-                <div class="profile-card mb-4 fade-in">
-                    <div class="profile-cover"></div>
-                    <div class="text-center">
-                        <img src="T4.jpg" width="120" height="120" alt="Profile" class="profile-avatar">
-                    </div>
-                    <div class="text-center p-3">
-                        <h5 class="mb-1">Dr. Sarah Johnson</h5>
-                        <div class="user-type teacher">Teacher</div>
+        <!-- About the Teacher -->
+        <section id="about" class="mb-5 fade-in">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="profile-card p-4 text-center">
+                        <div class="profile-cover mb-3"></div>
+                        <img src="T4.jpg" width="120" height="120" alt="Profile" class="profile-avatar mb-3">
+                        <h3 class="mb-1">Dr. Sarah Johnson</h3>
+                        <div class="user-type teacher mb-2">Teacher</div>
                         <p class="text-muted mb-2">Computer Science Professor at Stanford University</p>
                         <p class="text-muted small mb-3">Palo Alto, California</p>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-primary btn-sm">
-                                <span>View Profile</span>
-                            </button>
-                            <button class="btn btn-outline-primary btn-sm">Edit Profile</button>
+                        <hr>
+                        <h5>About</h5>
+                        <p class="mb-0">Dr. Sarah Johnson is a passionate educator and researcher in the field of
+                            Computer Science, specializing in Machine Learning and Artificial Intelligence. With over 10
+                            years of teaching experience, she is dedicated to inspiring students and advancing
+                            technology for the betterment of society.</p>
                         </div>
                     </div>
-                    <div class="border-top p-3">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="text-muted">Profile views</span>
-                            <span class="fw-bold">1,234</span>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">Post impressions</span>
-                            <span class="fw-bold">5,678</span>
+        </section>
+
+        <!-- Students' Feedbacks -->
+        <section id="feedbacks" class="mb-5 fade-in">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="sidebar-card p-4">
+                        <h4 class="section-title mb-4"><i class="fas fa-comments me-2"></i>Students' Feedbacks</h4>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-start mb-3">
+                                <img src="S1.png" alt="Student" class="post-avatar me-3">
+                        <div>
+                                    <h6 class="mb-1">Emily Davis</h6>
+                                    <p class="mb-1">"Dr. Johnson's classes are always engaging and insightful. She makes
+                                        complex topics easy to understand!"</p>
+                                    <span class="text-muted small">BSc Computer Science, 2023</span>
                         </div>
+                    </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <img src="S2.png" alt="Student" class="post-avatar me-3">
+                        <div>
+                                    <h6 class="mb-1">Mike Wilson</h6>
+                                    <p class="mb-1">"Her feedback and support helped me excel in my final year project.
+                                        Highly recommended!"</p>
+                                    <span class="text-muted small">BSc Data Science, 2022</span>
+                        </div>
+                    </div>
+                            <div class="d-flex align-items-start">
+                                <img src="S3.png" alt="Student" class="post-avatar me-3">
+                        <div>
+                                    <h6 class="mb-1">Sophia Lee</h6>
+                                    <p class="mb-1">"A wonderful mentor and an inspiring teacher. Her lessons are always
+                                        practical and up-to-date."</p>
+                                    <span class="text-muted small">BSc AI & Robotics, 2024</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
-
-                <!-- Connections -->
-                <div class="sidebar-card mb-4 fade-in">
-                    <div class="sidebar-title">
-                        <h6 class="mb-0">Your Connections</h6>
-                    </div>
-                    <div class="connection-item">
-                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
-                        <div>
-                            <p class="connection-name">John Smith</p>
-                            <p class="connection-title">Web Developer</p>
-                        </div>
-                    </div>
-                    <div class="connection-item">
-                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
-                        <div>
-                            <p class="connection-name">Emily Davis</p>
-                            <p class="connection-title">Data Scientist</p>
-                        </div>
-                    </div>
-                    <div class="connection-item">
-                        <img src="https://via.placeholder.com/40" alt="Connection" class="connection-avatar">
-                        <div>
-                            <p class="connection-name">Mike Wilson</p>
-                            <p class="connection-title">UX Designer</p>
-                        </div>
-                    </div>
-                    <div class="p-3 border-top">
-                        <a href="#" class="text-decoration-none">Show all connections</a>
-                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Education -->
-                <div class="sidebar-card mb-4 fade-in">
-                    <div class="sidebar-title">
-                        <h6 class="mb-0">Education</h6>
+        <!-- Class Lesson Materials from John Smith -->
+        <section id="materials" class="mb-5 fade-in">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="sidebar-card p-4">
+                        <h4 class="section-title mb-4"><i class="fas fa-book me-2"></i>Class Lesson Materials <span
+                                class="text-muted small">(by John Smith)</span></h4>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-file-pdf fa-lg text-danger me-3"></i>
+                                <div>
+                                    <strong>Introduction to React</strong><br>
+                                    <span class="text-muted small">PDF, 1.2MB</span>
                     </div>
-                    <div class="education-item">
-                        <img src="https://via.placeholder.com/48" alt="Stanford" class="education-logo">
+                                <a href="#" class="btn btn-outline-primary btn-sm ms-auto">Download</a>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-file-powerpoint fa-lg text-warning me-3"></i>
                         <div>
-                            <p class="education-school">Stanford University</p>
-                            <p class="education-degree">PhD in Computer Science</p>
-                            <p class="education-date">2015 - 2019</p>
+                                    <strong>Advanced JavaScript Concepts</strong><br>
+                                    <span class="text-muted small">PPT, 2.5MB</span>
                         </div>
-                    </div>
-                    <div class="education-item">
-                        <img src="https://via.placeholder.com/48" alt="MIT" class="education-logo">
+                                <a href="#" class="btn btn-outline-primary btn-sm ms-auto">Download</a>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="fas fa-file-code fa-lg text-info me-3"></i>
                         <div>
-                            <p class="education-school">MIT</p>
-                            <p class="education-degree">Master's in Computer Science</p>
-                            <p class="education-date">2013 - 2015</p>
+                                    <strong>Sample Project Source Code</strong><br>
+                                    <span class="text-muted small">ZIP, 4.8MB</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Skills -->
-                <div class="sidebar-card mb-4 fade-in">
-                    <div class="sidebar-title">
-                        <h6 class="mb-0">Skills</h6>
-                    </div>
-                    <ul class="skills-list">
-                        <li><span></span>Machine Learning</li>
-                        <li><span></span>Python</li>
-                        <li><span></span>Data Science</li>
-                        <li><span></span>Artificial Intelligence</li>
-                        <li><span></span>Deep Learning</li>
+                                <a href="#" class="btn btn-outline-primary btn-sm ms-auto">Download</a>
+                            </li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Main Feed -->
-            <div class="col-lg-6">
-                <!-- Create Post -->
-                <div class="post-card mb-4 fade-in">
-                    <div class="p-3">
-                        <div class="d-flex align-items-center">
-                            <img src="T4.jpg" alt="Profile" class="post-avatar">
-                            <input type="text" class="form-control post-input ms-3" placeholder="Start a post...">
                         </div>
-                        <div class="post-actions">
-                            <div class="post-action-btn">
-                                <i class="fas fa-image"></i>
-                                <span>Photo</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-video"></i>
-                                <span>Video</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-calendar"></i>
-                                <span>Event</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-newspaper"></i>
-                                <span>Article</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Post 1 -->
-                <div class="post-card mb-4 fade-in">
-                    <div class="p-3">
-                        <div class="post-author">
-                            <img src="T4.jpg" alt="Profile" class="post-avatar">
-                            <div class="post-author-info">
-                                <h6>Dr. Sarah Johnson</h6>
-                                <p>Computer Science Professor • 2h</p>
-                            </div>
-                        </div>
-                        <p class="mb-3">Excited to announce that I'll be teaching a new course on Advanced Machine Learning this semester! Looking forward to sharing insights with my students. #MachineLearning #Education #AI</p>
-                        <img src="https://via.placeholder.com/600x300" alt="Post" class="img-fluid rounded mb-3">
-                        <div class="post-actions">
-                            <div class="post-action-btn">
-                                <i class="fas fa-thumbs-up"></i>
-                                <span>Like</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-comment"></i>
-                                <span>Comment</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-share"></i>
-                                <span>Share</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-paper-plane"></i>
-                                <span>Send</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Post 2 -->
-                <div class="post-card mb-4 fade-in">
-                    <div class="p-3">
-                        <div class="post-author">
-                            <img src="https://via.placeholder.com/48" alt="Profile" class="post-avatar">
-                            <div class="post-author-info">
-                                <h6>John Smith</h6>
-                                <p>Web Developer • 4h</p>
-                            </div>
-                        </div>
-                        <p class="mb-3">Just completed a challenging React project! The learning curve was steep but totally worth it. Here are some key takeaways from the experience...</p>
-                        <div class="post-actions">
-                            <div class="post-action-btn">
-                                <i class="fas fa-thumbs-up"></i>
-                                <span>Like</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-comment"></i>
-                                <span>Comment</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-share"></i>
-                                <span>Share</span>
-                            </div>
-                            <div class="post-action-btn">
-                                <i class="fas fa-paper-plane"></i>
-                                <span>Send</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Sidebar -->
-            <div class="col-lg-3">
-                <!-- Featured Courses -->
-                <div class="sidebar-card mb-4 fade-in">
-                    <div class="sidebar-title">
-                        <h6 class="mb-0">Featured Courses</h6>
-                    </div>
-                    <div class="featured-courses">
-                        <div class="course-card">
-                            <img src="https://via.placeholder.com/220x120" alt="Course" class="course-img">
-                            <div class="course-body">
-                                <h6 class="course-title">Machine Learning Basics</h6>
-                                <p class="course-author">Dr. Sarah Johnson</p>
-                                <div class="course-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.8 (1.2k reviews)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="course-card">
-                            <img src="https://via.placeholder.com/220x120" alt="Course" class="course-img">
-                            <div class="course-body">
-                                <h6 class="course-title">Web Development</h6>
-                                <p class="course-author">John Smith</p>
-                                <div class="course-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.6 (856 reviews)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- News -->
-                <div class="sidebar-card mb-4 fade-in">
-                    <div class="sidebar-title">
-                        <h6 class="mb-0">Today's Top News</h6>
-                    </div>
-                    <div class="news-card">
-                        <h6 class="news-title">New AI Breakthrough in Education</h6>
-                        <p class="news-meta">Tech News • 2h ago</p>
-                    </div>
-                    <div class="news-card">
-                        <h6 class="news-title">Remote Learning Trends 2024</h6>
-                        <p class="news-meta">Education • 4h ago</p>
-                    </div>
-                    <div class="news-card">
-                        <h6 class="news-title">Best Programming Languages to Learn</h6>
-                        <p class="news-meta">Tech • 6h ago</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
 
     <!-- Bootstrap JS -->
@@ -931,7 +781,7 @@
 
     <script>
         // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
             const themeToggle = document.getElementById('themeToggle');
             
@@ -985,11 +835,7 @@
                 themeToggle.style.transform = 'rotate(0deg)';
             }, 300);
         }
-
-        // Show post modal (placeholder function)
-        function showPostModal() {
-            alert('Post creation modal would open here!');
-        }
     </script>
 </body>
+
 </html>
